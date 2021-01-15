@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include "preprocessor.h"
 
 using namespace std;
 
@@ -14,6 +15,7 @@ int main() {
         run_test(test_case_number);
     }
     return 0;
+
 }
 
 void run_test(int test_case_number) {
@@ -23,12 +25,15 @@ void run_test(int test_case_number) {
      * TODO: Take raw_code as your input, and output your processed code.
      * TODO: You'd better create new classes to handle your logic and use here only as an entrance.
      * */
-    string processed_code = raw_code;
+    Preprocessor p(raw_code);
+
+    string processed_code = p.preCompile();
+    cout << processed_code;
     put_processed_code(test_case_number, processed_code);
 }
 
 string get_unprocessed_code(int number) {
-    string filename = "test/test" + to_string(number) + ".cpp";
+    string filename = "../test/test" + to_string(number) + ".cpp";
     string file;
     ifstream is(filename);
     if (!is.is_open()) {
@@ -44,7 +49,7 @@ string get_unprocessed_code(int number) {
 }
 
 void put_processed_code(int number, string code) {
-    string filename = "test/test" + to_string(number) + ".out.cpp";
+    string filename = "../test/test" + to_string(number) + ".out.cpp";
     ofstream os(filename);
     if (!os.is_open()) {
         cout << "Broken output file.";
@@ -52,4 +57,4 @@ void put_processed_code(int number, string code) {
         os << code;
         os.close();
     }
-} 
+}

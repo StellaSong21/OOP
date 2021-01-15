@@ -8,6 +8,7 @@ if hash g++ 2>/dev/null; then
         echo "g++ environment set up."
     else
         echo "g++ not available on your system."
+        sleep 100
         exit -1
     fi
 
@@ -20,8 +21,13 @@ for i in ${DIRECTORY}/test*.out.cpp; do
         echo "compilation pass."
     else
         echo "error during g++ compilation."
+        sleep 100
         exit -1
     fi
 
     ./temp.out
-done 
+
+done
+
+sleep 100
+
